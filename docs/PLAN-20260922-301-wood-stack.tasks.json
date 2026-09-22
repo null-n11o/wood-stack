@@ -1,0 +1,16 @@
+{
+  "plan": "01_kcp:workspace/management/plans/2026/09/PLAN-20260922-301-wood-stack.md",
+  "tasks": [
+    {
+      "key": "wood-stack-development-preparation",
+      "title": "wood-stack｜詳細設計・実装計画の作成とレビュー",
+      "purpose": "個人DIYと小規模店舗オーナー向けwood-stackの仕様と実装計画をレビュー可能にする",
+      "scope": "wood-stackリポジトリ整備、Life Optimizer参照、実商品比較、画面・データ・計算・検索・広告中立性の詳細設計、実装計画とPR作成。プロダクトコード実装・マージ・公開・支払・本番反映は含まない",
+      "completion": "設計書・実装計画・実商品比較例・受入条件・検証記録をwood-stack側に保存し、PRを作成してCEOレビューを受ける。レビュー待ちはReview Requiredとする",
+      "depends_on": [],
+      "required": true,
+      "category": "Planning",
+      "url": "https://app.notion.com/p/3e3208bc20a38111923ccfe2aa7f9b26?pvs=204"
+    }
+  ]
+}

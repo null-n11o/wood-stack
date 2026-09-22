@@ -2,7 +2,7 @@
 
 ## 現在地と作業範囲
 
-2026-09-22時点では初期セットアップのみ。詳細設計・実装計画は次工程とし、プロダクトコードは作成しない。GitHubのセットアップはCEOが行う。新規リモート作成・接続先・公開範囲を推測しない。
+2026-09-22時点では詳細設計・実装計画のCEOレビュー待ち。プロダクトコードは作成しない。既存リモートは `https://github.com/null-n11o/wood-stack.git`。接続先・公開範囲を独断で変更しない。
 
 サービス名は `wood-stack`。利用者は個人DIYと小規模店舗オーナー。案件外商品も含めた複数店舗比較と通常リンクの案内を行い、広告報酬で順位を変えない。確定事項を再質問しない。
 
@@ -12,7 +12,7 @@
 2. KCPの `AGENTS.md`、`workspace/technology/rules.md`、`rules/plans.md`、`rules/tasks.md`、`rules/git.md`。
 3. `docs/README.md` と上位PLANコピー `docs/PLAN-20260922-301-wood-stack.md`。再開時にはKCPの正本との差分も確認する。
 4. KCPの `workspace/product/ideas/2026-09-22-家具建具・機械器具の特化メディア/` 内の `00-brief.md`、`05-open-questions.md`、`06-selection-2026-09-22.md`、`07-service-concepts-2026-09-22.md`。
-5. 作成後の `docs/superpowers/specs/` の設計書、続いて `docs/superpowers/plans/` の実装計画。
+5. `docs/review.md`、`docs/superpowers/specs/2026-09-22-wood-stack-design.md`、`docs/research/2026-09-22-real-products.md`、`docs/superpowers/plans/2026-09-22-wood-stack.md`。
 
 KCPのルートは `/Users/nakanokentaro/01_kcp`。別リポジトリである本リポにも上記規約を適用する。他環境ではKCPの配置を確認し、未読の規約を推測しない。旧調査の撤回済み推薦や仮定の収益を現在の決定として扱わない。
 
@@ -36,21 +36,21 @@ python3 /Users/nakanokentaro/01_kcp/tools/scripts/notion_tasks.py snapshot
 
 - `README.md`: サービス概要と現在地。
 - `docs/`: 上位PLANのスナップショットと参照情報。
-- `docs/superpowers/specs/`: 次工程で作る要件・詳細設計の正本。
-- `docs/superpowers/plans/`: 次工程で作る実装計画の正本。
+- `docs/superpowers/specs/`: レビュー待ちの要件・詳細設計の正本。
+- `docs/superpowers/plans/`: レビュー待ちの実装計画の正本。
 - `.cursor/rules/coding-harness.mdc`: ハーネスの選択。
 - `.claude/settings.json`: このプロジェクトのSuperpowers設定。
 
-技術構成は未選定。`/Users/nakanokentaro/02_dev/lifeoptimizer` は次工程で検索・比較・記事構成の再利用可能性を調べる参照先であり、技術構成を無条件にコピーしない。
+技術推奨案はAstro静的生成＋TypeScript＋JSON台帳＋Markdown記事。選定理由は `docs/decisions/2026-09-22-static-catalog.md`。Life Optimizerの調査結果は `docs/research/2026-09-22-lifeoptimizer-reuse.md`。
 
 ## Working rules
 
 - 既存の未コミット変更を保持し、書き込み担当は一人とする。
 - 通常の技術判断は推奨案を選び、理由を残す。事業方針や大きなトレードオフはCEOへ確認する。
-- 継続作業の正本はNotion。設計着手前にProjects/Tasksを完全取得して目的・対象・成果物を照合し、重複Taskを作らない。`rules/tasks.md` に従い依頼範囲の登録とIn Progressの書込確認後に進める。
+- 継続作業の正本はNotion。今回のTaskは `https://app.notion.com/p/3e3208bc20a38111923ccfe2aa7f9b26`。再開時に本文を読み、目的が変わる実装作業は明示依頼と照合する。新規着手前にProjects/Tasksを完全取得して目的・対象・成果物を照合し、重複Taskを作らない。`rules/tasks.md` に従い依頼範囲の登録とIn Progressの書込確認後に進める。
 - 開発の要件・設計・実装計画はこのリポジトリ、企画・経営の正本はKCPへ置く。
 - 既定ブランチから `codex/<内容>` の短命ブランチを作る。検証した依頼範囲だけをコミットする。
-- 今回はローカル保存まで。GitHub設定後の作業では既存リモートへのpush・PR作成までを通常の完了処理とし、マージ・公開・支払い・本番反映には別途明示承認を必要とする。
+- 今回の文書変更を含め、既存リモートへのpush・PR作成までを通常の完了処理とし、マージ・公開・支払い・本番反映には別途明示承認を必要とする。
 - 秘密値、実際の `.env`、認証情報、作業中間物をコミットしない。ライセンスや公開範囲を独断で設定しない。
 
 ## 開発ハーネスとSkill routing
