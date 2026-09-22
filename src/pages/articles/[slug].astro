@@ -1,0 +1,6 @@
+---
+import Base from '../../layouts/Base.astro';import {publishedArticles} from '../../articles/repository';import {render} from 'astro:content';import {presetHref} from '../../articles/related';import {siteCatalog} from '../../catalog/site';import type {Filters} from '../../search/state';
+export async function getStaticPaths(){return (await publishedArticles()).map(article=>({params:{slug:article.data.slug},props:{article}}));}
+const {article}=Astro.props;const {Content}=await render(article);const a=article.data;const catalog=await siteCatalog();
+---
+<Base title={a.title} description={a.description}><article class="article"><p><a href="/articles/">記事一覧</a></p><h1>{a.title}</h1><p class="muted">公開 {a.publishedAt} / 更新 {a.updatedAt}</p><Content/>{a.searchPreset&&<p><a class="button" href={presetHref(a.searchPreset as Partial<Filters>)}>この記事の条件で商品を探す</a></p>}{a.productIds.map(id=>{const p=catalog.products.find(p=>p.id===id)!;return <p><a href={'/products/'+p.slug+'/'}>{p.name}</a></p>;})}<h2>出典</h2><ul>{a.evidenceUrls.map(url=><li><a href={url} rel="noopener">{new URL(url).hostname}</a></li>)}</ul></article></Base>
