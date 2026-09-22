@@ -13,3 +13,7 @@ export function fixtureCatalog(rows: CatalogRow[] = [fixtureRow()]): Catalog {
  const unique = <T extends {id:string}>(xs:T[]) => [...new Map(xs.map(x=>[x.id,x])).values()];
  return {schemaVersion:1,sellers:unique(rows.map(r=>r.seller)),products:unique(rows.map(r=>r.product)),variants:unique(rows.map(r=>r.variant)),offers:unique(rows.map(r=>r.offer)),adLinks:[],images:[],evidence:[{id:'ev-a',url:'https://example.com/board',checkedAt:today,method:'direct',fields:['identity','dimensions','price','availability','uses','shipping','purchase-unit'],note:'合成fixture'}]};
 }
+export function e2eCatalog():Catalog{
+ const rows=[fixtureRow(),...['b','c','d'].map((s,i)=>fixtureRow({product:{id:'board-'+s,slug:'board-'+s,name:['B板','C板','D板'][i]},variant:{id:'variant-'+s,productId:'board-'+s},offer:{id:'offer-'+s,variantId:'variant-'+s}})),fixtureRow({product:{id:'top-a',slug:'top-a',name:'天板A',category:'top'},variant:{id:'top-v',productId:'top-a'},offer:{id:'top-o',variantId:'top-v'}})];
+ return fixtureCatalog(rows);
+}
