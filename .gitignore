@@ -1,0 +1,16 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.runtime/
+.worktrees/
+node_modules/
+dist/
+build/
+coverage/
+.next/
+.astro/
+*.log
+.claude/settings.local.json

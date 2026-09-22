@@ -1,0 +1,17 @@
+---
+description: wood-stackの開発ハーネス選択
+alwaysApply: true
+---
+
+# Coding harness
+
+このリポのデフォルトは **Superpowers**（計画→TDD→実装）。
+
+- 設計は brainstorming、実装計画は writing-plans を使う。
+- プロダクトコードの実装は設計・実装計画のCEOレビュー通過後に開始する。
+- 実装ではTDDと完了前検証を行う。
+- pstack / gstackを同時に有効にしない。切り替えは明示的に選択して永続化する。
+- Claude Codeは `.claude/settings.json` のプロジェクト設定を使用する。
+- Codexはスキル単体を使用し、ユーザー全域のプラグイン設定を変更しない。
+
+作業範囲と規約は `AGENTS.md` を参照する。初期セットアップ時点では設計・実装へ進まない。
