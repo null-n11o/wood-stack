@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "sellers": [
+    {
+      "id": "toolbox",
+      "name": "toolbox",
+      "channel": "direct",
+      "shopUrl": "https://www.r-toolbox.jp/",
+      "purchaseHosts": [
+        "www.r-toolbox.jp"
+      ]
+    }
+  ],
+  "products": [
+    {
+      "id": "toolbox-5mm-unpainted",
+      "slug": "toolbox-5mm-unpainted",
+      "name": "5mm厚の足場板 無塗装",
+      "category": "board",
+      "species": "杉",
+      "finish": "無塗装",
+      "uses": [
+        "wall"
+      ],
+      "description": "厚さ5mmの杉板。壁への貼り付け用として案内されている。",
+      "status": "draft",
+      "identityEvidenceId": "toolbox-6346-20260922",
+      "imageId": null
+    }
+  ],
+  "variants": [
+    {
+      "id": "toolbox-6346",
+      "productId": "toolbox-5mm-unpainted",
+      "sellerSku": "WL-WB001-04-G038",
+      "length": {
+        "kind": "bounded",
+        "minMm": 909,
+        "maxMm": 911
+      },
+      "width": {
+        "kind": "bounded",
+        "minMm": 134,
+        "maxMm": 136
+      },
+      "thickness": {
+        "kind": "bounded",
+        "minMm": 4,
+        "maxMm": 6
+      },
+      "coverageWidth": {
+        "kind": "bounded",
+        "minMm": 134,
+        "maxMm": 136
+      },
+      "geometry": "uniform",
+      "evidenceId": "toolbox-6346-20260922"
+    }
+  ],
+  "offers": [
+    {
+      "id": "toolbox-6346-case10",
+      "variantId": "toolbox-6346",
+      "sellerId": "toolbox",
+      "sourceUrl": "https://www.r-toolbox.jp/store/product/6346/",
+      "purchaseUrl": "https://www.r-toolbox.jp/store/product/6346/",
+      "saleUnit": "set",
+      "piecesPerUnit": 10,
+      "price": {
+        "kind": "fixed",
+        "yen": 6200,
+        "tax": "included"
+      },
+      "shipping": {
+        "kind": "unknown",
+        "note": "地域・数量に応じた送料の確認が必要"
+      },
+      "availability": "made-to-order",
+      "minimumUnits": 1,
+      "unitStep": 1,
+      "maxUnits": null,
+      "checkedAt": "2026-09-22",
+      "evidenceIds": [
+        "toolbox-6346-20260922",
+        "toolbox-tax-20260922"
+      ]
+    }
+  ],
+  "adLinks": [
+    {
+      "offerId": "toolbox-6346-case10",
+      "state": "none",
+      "url": null,
+      "allowedHosts": [],
+      "checkedAt": null,
+      "expiresAt": null
+    }
+  ],
+  "evidence": [
+    {
+      "id": "toolbox-6346-20260922",
+      "url": "https://www.r-toolbox.jp/store/product/6346/",
+      "checkedAt": "2026-09-22",
+      "method": "direct",
+      "fields": [
+        "identity",
+        "dimensions",
+        "price",
+        "availability"
+      ],
+      "note": "設計用サンプル。価格・仕様・入数を照合。注文数量制約は実登録時に再確認。"
+    },
+    {
+      "id": "toolbox-tax-20260922",
+      "url": "https://www.r-toolbox.jp/order/cart?style=estimation",
+      "checkedAt": "2026-09-22",
+      "method": "direct",
+      "fields": [
+        "tax"
+      ],
+      "note": "税込表示の案内を確認。注文操作なし。"
+    }
+  ],
+  "images": []
+}
