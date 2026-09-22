@@ -8,7 +8,7 @@
 
 **Tech Stack:** Node.js 22系、npm、Astro 7系、TypeScript strict、Vitest、Playwright。依存は実装時に互換性確認後、package-lock.jsonへ固定。
 
-**Spec:** [2026-09-22-wood-stack-design.md](../specs/2026-09-22-wood-stack-design.md)。作成日2026-09-22、設計・本計画ともレビュー待ち。以下のコードブロックは実装時の契約・テスト例であり、今回のPRには実行コードを作成しない。
+**Spec:** [2026-09-22-wood-stack-design.md](../specs/2026-09-22-wood-stack-design.md)。作成日2026-09-22、設計・本計画とも2026-09-22 CEO承認済み。以下のコードブロックは実装時の契約・テスト例であり、実装開始時の契約として使用する。
 
 ## Global Constraints
 

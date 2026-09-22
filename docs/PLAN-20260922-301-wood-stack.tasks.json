@@ -11,6 +11,18 @@
       "required": true,
       "category": "Planning",
       "url": "https://app.notion.com/p/3e3208bc20a38111923ccfe2aa7f9b26?pvs=204"
+    },
+    {
+      "key": "wood-stack-initial-implementation",
+      "title": "wood-stack｜承認済み初版の実装と受入検証",
+      "purpose": "板材・天板を複数店舗で比較し壁材数量と材料費を概算できる初版を実装する",
+      "scope": "承認済みspecと実装計画Task 1〜8をTDDで順次実装・検証・コミットし既存リモートへpush・PR作成。壁一面の長方形、開口部差引きなし、端材再利用なし。マージ・公開・支払・本番反映は除外",
+      "completion": "A01〜A14の実装と検証、運営手順、CI、PR、未確認の公開条件と再開位置を記録してCEO受入に提示",
+      "depends_on": [
+        "wood-stack-development-preparation"
+      ],
+      "required": true,
+      "url": "https://app.notion.com/p/3e3208bc20a38113b5cedcbbc5af9b6f?pvs=204"
     }
   ]
 }
