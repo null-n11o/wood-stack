@@ -1,0 +1,6 @@
+---
+import {priceText} from '../catalog/format';
+import type {Offer} from '../catalog/types';
+interface Props{offer:Offer}const {offer}=Astro.props;
+---
+<p>{priceText(offer)}</p><p class="muted">送料{offer.shipping.kind==='unknown'?'未確認':offer.shipping.kind==='quote'?'は見積もり':'は適用条件を確認'}</p>

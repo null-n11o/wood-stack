@@ -1,0 +1,5 @@
+---
+import Base from '../../layouts/Base.astro';import ProductCard from '../../components/ProductCard.astro';import {siteCatalog} from '../../catalog/site';import {catalogRows} from '../../search/compare';
+const catalog=await siteCatalog(),rows=catalogRows(catalog);
+---
+<Base title="商品を探す" noindex><p class="eyebrow">MATERIAL CATALOG</p><h1>商品を探す</h1><p class="intro">寸法・販売単位・確認日をそろえて比較できます。送料と材料費は別に表示します。</p><noscript><p class="notice">検索・比較・計算にはJavaScriptが必要です。商品情報と購入先は以下から確認できます。</p></noscript><div id="static-catalog" class="grid">{catalog.products.map(p=>{const rs=rows.filter(r=>r.product.id===p.id);return <ProductCard row={rs[0]} count={new Set(rs.map(r=>r.seller.id)).size}/>;})}</div></Base>

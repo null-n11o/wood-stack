@@ -1,8 +1,8 @@
 import {z} from 'zod';
 const id=z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
 const text=z.string().trim().min(1);
-const int=z.number().int().safe().min(1).max(100000000);
-const money=z.number().int().safe().min(0).max(100000000);
+const int=z.number().int().min(1).max(100000000);
+const money=z.number().int().min(0).max(100000000);
 export const httpsUrl=z.string().refine(s=>{try{const u=new URL(s);return u.protocol==='https:'&&!u.username&&!u.password&&!!u.hostname;}catch{return false;}},'HTTPS URL required');
 const host=text.refine(s=>{try{return new URL('https://'+s).host===s&&!s.includes(':')&&!s.includes('@');}catch{return false;}},'invalid host');
 export const date=z.string().regex(/^\d{4}-\d{2}-\d{2}$/).refine(s=>{const d=new Date(s+'T00:00:00Z');return !isNaN(+d)&&d.toISOString().slice(0,10)===s;},'invalid date');

@@ -1,0 +1,6 @@
+---
+import Base from '../../layouts/Base.astro';import OfferList from '../../components/OfferList.astro';import {siteCatalog} from '../../catalog/site';import {catalogRows} from '../../search/compare';
+export async function getStaticPaths(){const catalog=await siteCatalog();return catalog.products.map(product=>({params:{slug:product.slug},props:{product,catalog}}));}
+const {product,catalog}=Astro.props;const rows=catalogRows(catalog).filter(r=>r.product.id===product.id);
+---
+<Base title={product.name} description={product.description}><p><a href="/products/">商品一覧へ</a></p><h1>{product.name}</h1><p class="intro">{product.description}</p><div class="notice">画像未掲載。数量と施工方法は購入前に販売店へご確認ください。</div><OfferList rows={rows} catalog={catalog}/><h2>選び方の記事</h2><a href="/articles/">寸法・数量・価格の見方を読む</a></Base>
