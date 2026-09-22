@@ -466,6 +466,10 @@ test.each([[1800,900,'vertical',24800],[900,1800,'vertical',18600],[2700,2400,'h
 - [ ] **Step 6:** catalog-operationsに登録・再確認周期・画像権利・広告停止・取込復旧を記述。通常buildに試験fixtureが含まれないことを確認し、READMEとAGENTSへ実在するコマンドを反映。
 - [ ] **Step 7:** `npm run verify`、`git diff --check` の結果とA01〜A14の証跡を保存。 `git commit -m "test: verify wood-stack acceptance and editorial workflow"`、既存リモートへpushしてPRを作成。CEOへ受入を求め、マージ・公開は行わない。
 
+## 実行結果
+
+2026-09-22にCEO承認を取得し、Task 1〜8を順次実装した。以下の手順・コード例は承認時の計画として残す。実際のコミットと受入結果は[実装検証](../../implementation-verification.md)を参照。実行時には共通フォーム処理をshared.tsへ集約し、検証コマンドを実在するものへ具体化した。
+
 ## 計画の自己点検
 
 specのA01〜A14を各Taskへ対応付けた。金額やURLの関数は画面内に重複させず、Task 1〜4の戻り値を使う。テストコード中のURLと商品名は試験専用であり、Task 5の実商品登録で採用しない。参考計算のrankable=false、送料null、広告の後結合を各Taskの境界で保持する。

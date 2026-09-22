@@ -1,3 +1,27 @@
-import {test,expect} from '@playwright/test';
-test('記事から無塗装検索・商品・関連記事へ移動',async({page})=>{await page.clock.setFixedTime(new Date('2026-09-22T03:00:00Z'));await page.goto('/articles/board-quantity/');await page.getByRole('link',{name:'この記事の条件で商品を探す',exact:true}).click();await expect(page.getByLabel('仕上げ',{exact:true})).toHaveValue('無塗装');await page.getByRole('link',{name:'A板',exact:true}).click();await page.getByRole('link',{name:'壁材の必要枚数と購入セット数',exact:true}).click();await expect(page.getByRole('heading',{level:1})).toHaveText('壁材の必要枚数と購入セット数');});
-test('記事一覧のAND検索と0件',async({page})=>{await page.goto('/articles/');await page.getByLabel('記事の検索語',{exact:true}).fill('枚数 セット');await page.getByRole('button',{name:'記事を検索',exact:true}).click();await expect(page.getByRole('status')).toHaveText('1件');await page.getByLabel('記事の検索語',{exact:true}).fill('存在しない記事');await page.getByRole('button',{name:'記事を検索',exact:true}).click();await expect(page.getByRole('status')).toHaveText('0件');});
+import { test, expect } from '@playwright/test';
+test('記事から無塗装検索・商品・関連記事へ移動', async ({ page }) => {
+  await page.clock.setFixedTime(new Date('2026-09-22T03:00:00Z'));
+  await page.goto('/articles/board-quantity/');
+  await page
+    .getByRole('link', { name: 'この記事の条件で商品を探す', exact: true })
+    .click();
+  await expect(page.getByLabel('仕上げ', { exact: true })).toHaveValue(
+    '無塗装',
+  );
+  await page.getByRole('link', { name: 'A板', exact: true }).click();
+  await page
+    .getByRole('link', { name: '壁材の必要枚数と購入セット数', exact: true })
+    .click();
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText(
+    '壁材の必要枚数と購入セット数',
+  );
+});
+test('記事一覧のAND検索と0件', async ({ page }) => {
+  await page.goto('/articles/');
+  await page.getByLabel('記事の検索語', { exact: true }).fill('枚数 セット');
+  await page.getByRole('button', { name: '記事を検索', exact: true }).click();
+  await expect(page.getByRole('status')).toHaveText('1件');
+  await page.getByLabel('記事の検索語', { exact: true }).fill('存在しない記事');
+  await page.getByRole('button', { name: '記事を検索', exact: true }).click();
+  await expect(page.getByRole('status')).toHaveText('0件');
+});

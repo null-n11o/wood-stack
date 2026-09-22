@@ -1,9 +1,61 @@
 ---
-import type {Catalog,CatalogRow} from '../catalog/types';
-import {dimensionText,availabilityText} from '../catalog/format';
-import {purchaseLink} from '../offers/links';
-import {jstToday} from '../offers/freshness';
+import type { Catalog, CatalogRow } from '../catalog/types';
+import { dimensionText, availabilityText } from '../catalog/format';
+import { purchaseLink } from '../offers/links';
+import { jstToday } from '../offers/freshness';
 import Price from './Price.astro';
-interface Props{rows:CatalogRow[];catalog:Catalog}const {rows,catalog}=Astro.props;
+interface Props {
+  rows: CatalogRow[];
+  catalog: Catalog;
+}
+const { rows, catalog } = Astro.props;
 ---
-{rows.map(row=>{const link=purchaseLink(row.offer,row.seller,catalog.adLinks.find(a=>a.offerId===row.offer.id),jstToday());return <section class="panel"><h2>{row.seller.name}</h2><dl><dt>長さ</dt><dd>{dimensionText(row.variant.length)}</dd><dt>幅</dt><dd>{dimensionText(row.variant.width)}</dd><dt>有効幅</dt><dd>{dimensionText(row.variant.coverageWidth)}</dd><dt>厚さ</dt><dd>{dimensionText(row.variant.thickness)}</dd><dt>販売状態</dt><dd>{availabilityText[row.offer.availability]}</dd><dt>販売状態確認日</dt><dd>{row.offer.checkedAt}</dd></dl><Price offer={row.offer}/>{row.offer.availability==='discontinued'?<p>販売終了</p>:<a href={link.href} rel={link.rel}>{link.label}</a>}<p><a href={row.offer.sourceUrl} rel="noopener">商品情報の出典</a></p>{catalog.evidence.filter(e=>row.offer.evidenceIds.includes(e.id)).map(e=><p class="muted"><a href={e.url}>{e.fields.join('・')}</a> — {e.checkedAt}確認（{e.method}）</p>)}</section>;})}
+
+{rows.map((row) => {
+  const link = purchaseLink(
+    row.offer,
+    row.seller,
+    catalog.adLinks.find((a) => a.offerId === row.offer.id),
+    jstToday(),
+  );
+  return (
+    <section class="panel">
+      <h2>{row.seller.name}</h2>
+      <dl>
+        <dt>長さ</dt>
+        <dd>{dimensionText(row.variant.length)}</dd>
+        <dt>幅</dt>
+        <dd>{dimensionText(row.variant.width)}</dd>
+        <dt>有効幅</dt>
+        <dd>{dimensionText(row.variant.coverageWidth)}</dd>
+        <dt>厚さ</dt>
+        <dd>{dimensionText(row.variant.thickness)}</dd>
+        <dt>販売状態</dt>
+        <dd>{availabilityText[row.offer.availability]}</dd>
+        <dt>販売状態確認日</dt>
+        <dd>{row.offer.checkedAt}</dd>
+      </dl>
+      <Price offer={row.offer} />
+      {row.offer.availability === 'discontinued' ? (
+        <p>販売終了</p>
+      ) : (
+        <a href={link.href} rel={link.rel}>
+          {link.label}
+        </a>
+      )}
+      <p>
+        <a href={row.offer.sourceUrl} rel="noopener">
+          商品情報の出典
+        </a>
+      </p>
+      {catalog.evidence
+        .filter((e) => row.offer.evidenceIds.includes(e.id))
+        .map((e) => (
+          <p class="muted">
+            <a href={e.url}>{e.fields.join('・')}</a> — {e.checkedAt}確認（
+            {e.method}）
+          </p>
+        ))}
+    </section>
+  );
+})}

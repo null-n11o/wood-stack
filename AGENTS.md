@@ -30,24 +30,27 @@ python3 /Users/nakanokentaro/01_kcp/tools/kcp.py --root /Users/nakanokentaro/01_
 python3 /Users/nakanokentaro/01_kcp/tools/scripts/notion_tasks.py snapshot
 ```
 
-現時点ではアプリの起動・ビルド・テストコマンドは存在しない。技術選定と実装時に実在するコマンドをここへ追記する。文書変更は参照先と差分を検証する。
+Node 22.22.3。初回は `npm ci` と `npx playwright install chromium webkit`。起動は `npm run dev`、ビルドは `npm run build`、全検証は `npm run verify`。単体は `npm test`、画面は `npm run test:e2e`。取込は `docs/catalog-operations.md` に従う。文書変更は参照先と差分を検証する。
 
 ## Architecture
 
 - `README.md`: サービス概要と現在地。
 - `docs/`: 上位PLANのスナップショットと参照情報。
-- `docs/superpowers/specs/`: レビュー待ちの要件・詳細設計の正本。
-- `docs/superpowers/plans/`: レビュー待ちの実装計画の正本。
+- `docs/superpowers/specs/`: 承認済みの要件・詳細設計の正本。
+- `docs/superpowers/plans/`: 承認済みの実装計画の正本。
+- `src/`: 商品台帳・計算・検索・静的ページ・記事。
+- `tests/`: 単体とChromium/WebKit E2E。
+- `docs/implementation-verification.md`: 実装証跡と公開前の残課題。
 - `.cursor/rules/coding-harness.mdc`: ハーネスの選択。
 - `.claude/settings.json`: このプロジェクトのSuperpowers設定。
 
-技術推奨案はAstro静的生成＋TypeScript＋JSON台帳＋Markdown記事。選定理由は `docs/decisions/2026-09-22-static-catalog.md`。Life Optimizerの調査結果は `docs/research/2026-09-22-lifeoptimizer-reuse.md`。
+技術構成はAstro静的生成＋TypeScript＋JSON台帳＋Markdown記事。選定理由は `docs/decisions/2026-09-22-static-catalog.md`。Life Optimizerの調査結果は `docs/research/2026-09-22-lifeoptimizer-reuse.md`。
 
 ## Working rules
 
 - 既存の未コミット変更を保持し、書き込み担当は一人とする。
 - 通常の技術判断は推奨案を選び、理由を残す。事業方針や大きなトレードオフはCEOへ確認する。
-- 継続作業の正本はNotion。今回のTaskは `https://app.notion.com/p/3e3208bc20a38111923ccfe2aa7f9b26`。再開時に本文を読み、目的が変わる実装作業は明示依頼と照合する。新規着手前にProjects/Tasksを完全取得して目的・対象・成果物を照合し、重複Taskを作らない。`rules/tasks.md` に従い依頼範囲の登録とIn Progressの書込確認後に進める。
+- 継続作業の正本はNotion。実装Taskは `https://app.notion.com/p/3e3208bc20a38113b5cedcbbc5af9b6f`（準備Taskは受入済み）。再開時に本文を読み、目的が変わる実装作業は明示依頼と照合する。新規着手前にProjects/Tasksを完全取得して目的・対象・成果物を照合し、重複Taskを作らない。`rules/tasks.md` に従い依頼範囲の登録とIn Progressの書込確認後に進める。
 - 開発の要件・設計・実装計画はこのリポジトリ、企画・経営の正本はKCPへ置く。
 - 既定ブランチから `codex/<内容>` の短命ブランチを作る。検証した依頼範囲だけをコミットする。
 - 今回の文書変更を含め、既存リモートへのpush・PR作成までを通常の完了処理とし、マージ・公開・支払い・本番反映には別途明示承認を必要とする。
@@ -59,7 +62,7 @@ python3 /Users/nakanokentaro/01_kcp/tools/scripts/notion_tasks.py snapshot
 
 - 設計: `brainstorming`。
 - 実装計画: `writing-plans`。
-- レビュー通過後の実装: `test-driven-development`。計画のTask順に進め、Task単位でコミットする。
+- レビュー通過後の実装: `executing-plans` と `test-driven-development`。計画のTask順に進め、Task単位でコミットする。
 - 完了前の検証: `verification-before-completion`。
 - 長文・技術記事: KCP指定の `japanese-tech-writing`、日本語校閲: `japanese-proofreading`。
 

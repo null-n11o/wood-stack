@@ -1,6 +1,56 @@
 ---
-import Base from '../../layouts/Base.astro';import {publishedArticles} from '../../articles/repository';import {searchArticles} from '../../articles/related';
-const articles=(await publishedArticles()).map(a=>a.data),items=searchArticles(articles,'','',1).items;
+import Base from '../../layouts/Base.astro';
+import { publishedArticles } from '../../articles/repository';
+import { searchArticles } from '../../articles/related';
+const articles = (await publishedArticles()).map((a) => a.data),
+  items = searchArticles(articles, '', '', 1).items;
 ---
-<Base title="選び方の記事"><p class="eyebrow">MATERIAL NOTES</p><h1>選び方の記事</h1><p>数量・寸法・費用を確認し、自分の条件で商品を探せます。</p><form id="article-form"><fieldset disabled><div class="form-grid"><label>記事の検索語<input name="q" maxlength="100"/></label><label>記事カテゴリー<select name="category" aria-label="記事カテゴリー"><option value="">すべて</option><option value="board">板材</option><option value="top">天板</option></select></label></div><button>記事を検索</button></fieldset></form><p id="article-status" role="status">{articles.length}件</p><div id="article-list" class="grid">{items.map(a=><article class="card"><h2><a href={'/articles/'+a.slug+'/'}>{a.title}</a></h2><p>{a.description}</p><p class="muted">更新 {a.updatedAt}</p></article>)}</div><div id="article-pages" class="actions"></div><script id="article-data" type="application/json" set:html={JSON.stringify(articles).replace(/</g,'\\u003c')}/></Base>
-<script>import {startArticles} from '../../client/articles';startArticles();</script>
+
+<Base title="選び方の記事">
+  <p class="eyebrow">MATERIAL NOTES</p>
+  <h1>選び方の記事</h1>
+  <p>数量・寸法・費用を確認し、自分の条件で商品を探せます。</p>
+  <form id="article-form">
+    <fieldset disabled>
+      <div class="form-grid">
+        <label>
+          記事の検索語
+          <input name="q" maxlength="100" />
+        </label>
+        <label>
+          記事カテゴリー
+          <select name="category" aria-label="記事カテゴリー">
+            <option value="">すべて</option>
+            <option value="board">板材</option>
+            <option value="top">天板</option>
+          </select>
+        </label>
+      </div>
+      <button>記事を検索</button>
+    </fieldset>
+  </form>
+  <p id="article-status" role="status">
+    {articles.length}件
+  </p>
+  <div id="article-list" class="grid">
+    {items.map((a) => (
+      <article class="card">
+        <h2>
+          <a href={'/articles/' + a.slug + '/'}>{a.title}</a>
+        </h2>
+        <p>{a.description}</p>
+        <p class="muted">更新 {a.updatedAt}</p>
+      </article>
+    ))}
+  </div>
+  <div id="article-pages" class="actions"></div>
+  <script
+    id="article-data"
+    type="application/json"
+    set:html={JSON.stringify(articles).replace(/</g, '\\u003c')}
+  ></script>
+</Base>
+<script>
+  import { startArticles } from '../../client/articles';
+  startArticles();
+</script>

@@ -1,1 +1,67 @@
-<form id="wall-form" novalidate><fieldset disabled><legend>壁一面の条件</legend><div class="form-grid"><label>壁の幅（mm）<input id="ww" name="ww" inputmode="numeric" required placeholder="1800"/></label><label>壁の高さ（mm）<input id="wh" name="wh" inputmode="numeric" required placeholder="900"/></label><label>張る方向<select name="direction" aria-label="張る方向"><option value="vertical">縦張り</option><option value="horizontal">横張り</option></select></label><label>長手方向の継ぎ<select name="joint" aria-label="長手方向の継ぎ"><option value="none">継ぎなし</option><option value="butt">突付けで継ぐ概算</option></select></label><label>各端の加工余裕（mm）<input id="trim" name="trim" value="5" inputmode="numeric"/></label><label>切断余裕（mm）<input id="kerf" name="kerf" value="3" inputmode="numeric"/></label><label>予備率（%）<input id="reserve" name="reserve" value="10" inputmode="numeric"/></label><label>追加予備（枚）<input id="extra" name="extra" value="0" inputmode="numeric"/></label><label>材料費予算（円）<input id="mbudget" name="mbudget" inputmode="numeric" placeholder="制限なし"/></label></div><button type="submit">計算する</button></fieldset></form>
+<form id="wall-form" novalidate>
+  <fieldset disabled>
+    <legend>壁一面の条件</legend>
+    <div class="form-grid">
+      <label>
+        壁の幅（mm）
+        <input
+          id="ww"
+          name="ww"
+          inputmode="numeric"
+          required
+          placeholder="1800"
+        />
+      </label>
+      <label>
+        壁の高さ（mm）
+        <input
+          id="wh"
+          name="wh"
+          inputmode="numeric"
+          required
+          placeholder="900"
+        />
+      </label>
+      <label>
+        張る方向
+        <select name="direction" aria-label="張る方向">
+          <option value="vertical">縦張り</option>
+          <option value="horizontal">横張り</option>
+        </select>
+      </label>
+      <label>
+        長手方向の継ぎ
+        <select name="joint" aria-label="長手方向の継ぎ">
+          <option value="none">継ぎなし</option>
+          <option value="butt">突付けで継ぐ概算</option>
+        </select>
+      </label>
+      <label>
+        各端の加工余裕（mm）
+        <input id="trim" name="trim" value="5" inputmode="numeric" />
+      </label>
+      <label>
+        切断余裕（mm）
+        <input id="kerf" name="kerf" value="3" inputmode="numeric" />
+      </label>
+      <label>
+        予備率（%）
+        <input id="reserve" name="reserve" value="10" inputmode="numeric" />
+      </label>
+      <label>
+        追加予備（枚）
+        <input id="extra" name="extra" value="0" inputmode="numeric" />
+      </label>
+      <label>
+        材料費予算（円）
+        <input
+          id="mbudget"
+          name="mbudget"
+          inputmode="numeric"
+          placeholder="制限なし"
+        />
+      </label>
+    </div>
+    <button type="submit">計算する</button>
+  </fieldset>
+</form>

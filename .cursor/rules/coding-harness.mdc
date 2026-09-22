@@ -14,4 +14,4 @@ alwaysApply: true
 - Claude Codeは `.claude/settings.json` のプロジェクト設定を使用する。
 - Codexはスキル単体を使用し、ユーザー全域のプラグイン設定を変更しない。
 
-作業範囲と規約は `AGENTS.md` を参照する。設計・実装計画はレビュー待ち。CEOレビュー通過前にプロダクトコードを実装しない。
+作業範囲と規約は `AGENTS.md` を参照する。2026-09-22に設計・実装計画はCEO承認済み。executing-plansとTDDで実装し、マージ・公開は別途明示承認を必要とする。

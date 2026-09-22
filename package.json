@@ -14,7 +14,10 @@
     "preview": "astro preview",
     "build:test": "node scripts/build.mjs --test",
     "test:e2e": "playwright test",
-    "check:content": "tsx scripts/check-content.ts"
+    "check:content": "tsx scripts/check-content.ts",
+    "check:links": "tsx scripts/check-links.ts",
+    "verify": "npm run check && npm test && npm run check:content && npm run build && npm run check:links && npm run test:e2e",
+    "format": "prettier --write src scripts tests *.ts *.mjs *.json"
   },
   "dependencies": {
     "astro": "7.3.3",
@@ -25,6 +28,8 @@
     "@playwright/test": "1.63.0",
     "@types/node": "22.20.4",
     "gray-matter": "4.0.3",
+    "prettier": "3.9.8",
+    "prettier-plugin-astro": "1.0.1",
     "tsx": "4.23.15",
     "typescript": "6.0.3",
     "vitest": "5.0.1"

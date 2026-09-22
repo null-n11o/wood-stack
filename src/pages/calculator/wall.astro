@@ -1,5 +1,24 @@
 ---
-import Base from '../../layouts/Base.astro';import CompareTray from '../../components/CompareTray.astro';import LoadStatus from '../../components/LoadStatus.astro';import WallForm from '../../components/WallForm.astro';import Estimate from '../../components/Estimate.astro';
+import Base from '../../layouts/Base.astro';
+import CompareTray from '../../components/CompareTray.astro';
+import LoadStatus from '../../components/LoadStatus.astro';
+import WallForm from '../../components/WallForm.astro';
+import Estimate from '../../components/Estimate.astro';
 ---
-<Base title="壁材の数量を計算" noindex><h1>壁材の数量を計算</h1><p>比較に追加した板材を同じ壁条件で計算します。</p><LoadStatus/><CompareTray/><WallForm/><Estimate/><div class="actions"><a href="/products/">板材を追加</a><a href="/compare/">計算条件を比較へ戻す</a></div></Base>
-<script>import {startWall} from '../../client/wall';startWall();</script>
+
+<Base title="壁材の数量を計算" noindex>
+  <h1>壁材の数量を計算</h1>
+  <p>比較に追加した板材を同じ壁条件で計算します。</p>
+  <LoadStatus />
+  <CompareTray />
+  <WallForm />
+  <Estimate />
+  <div class="actions">
+    <a href="/products/">板材を追加</a>
+    <a href="/compare/">計算条件を比較へ戻す</a>
+  </div>
+</Base>
+<script>
+  import { startWall } from '../../client/wall';
+  startWall();
+</script>

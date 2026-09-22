@@ -1,2 +1,18 @@
-import {defineConfig,devices} from '@playwright/test';
-export default defineConfig({testDir:'tests/e2e',fullyParallel:true,workers:2,use:{baseURL:'http://127.0.0.1:4322',trace:'retain-on-failure'},projects:[{name:'chromium',use:{...devices['Desktop Chrome']}},{name:'webkit',use:{...devices['Desktop Safari']}}],webServer:{command:'npm run build:test && npm run preview -- --outDir dist-test --ignore-lock --host 127.0.0.1 --port 4322',url:'http://127.0.0.1:4322',reuseExistingServer:false,timeout:120000}});
+import { defineConfig, devices } from '@playwright/test';
+export default defineConfig({
+  testDir: 'tests/e2e',
+  fullyParallel: true,
+  workers: 2,
+  use: { baseURL: 'http://127.0.0.1:4322', trace: 'retain-on-failure' },
+  projects: [
+    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+    { name: 'webkit', use: { ...devices['Desktop Safari'] } },
+  ],
+  webServer: {
+    command:
+      'npm run build:test && npm run preview -- --outDir dist-test --ignore-lock --host 127.0.0.1 --port 4322',
+    url: 'http://127.0.0.1:4322',
+    reuseExistingServer: false,
+    timeout: 120000,
+  },
+});

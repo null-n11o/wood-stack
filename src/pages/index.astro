@@ -1,7 +1,73 @@
 ---
-import {publishedArticles} from '../articles/repository';
-import {searchArticles} from '../articles/related';
-const articles=searchArticles((await publishedArticles()).map(a=>a.data),'','',1).items.slice(0,3);
+import { publishedArticles } from '../articles/repository';
+import { searchArticles } from '../articles/related';
+const articles = searchArticles(
+  (await publishedArticles()).map((a) => a.data),
+  '',
+  '',
+  1,
+).items.slice(0, 3);
 import Base from '../layouts/Base.astro';
 ---
-<Base title="木材を同じ条件で比較"><section class="hero"><p class="eyebrow">MATERIALS FOR YOUR NEXT SPACE</p><h1>木材選びに、<br/>寸法と費用の見通しを。</h1><p class="intro">壁一面の模様替えから、お店のカウンターまで。<br/>購入先を横断して仕様を比べ、必要な数量を確かめられます。</p><div class="actions"><a class="button" href="/products/?v=1&category=board">板材を探す</a><a class="button" href="/products/?v=1&category=top">天板を探す</a><a class="button" href="/calculator/wall/">壁材の数量を計算</a></div></section><section><h2>購入前の比較ポイント</h2><div class="grid"><div class="panel"><h3>寸法と販売単位</h3><p>1枚と1セット。注文できる寸法と届く寸法の範囲。それぞれを分けて確認します。</p></div><div class="panel"><h3>材料費と送料</h3><p>送料が不明な商品はそのまま表示。板材代と送料等を含む小計を区別します。</p></div><div class="panel"><h3>広告に左右されない順序</h3><p>広告案件の有無で並び順を変えず、通常の購入先も案内します。</p></div></div></section><h2>選び方を読む</h2><div class="grid">{articles.map(a=><article class="card"><h3><a href={"/articles/"+a.slug+"/"}>{a.title}</a></h3><p>{a.description}</p></article>)}</div><p><a href="/articles/">記事一覧へ</a></p></Base>
+
+<Base title="木材を同じ条件で比較">
+  <section class="hero">
+    <p class="eyebrow">MATERIALS FOR YOUR NEXT SPACE</p>
+    <h1>
+      木材選びに、
+      <br />
+      寸法と費用の見通しを。
+    </h1>
+    <p class="intro">
+      壁一面の模様替えから、お店のカウンターまで。
+      <br />
+      購入先を横断して仕様を比べ、必要な数量を確かめられます。
+    </p>
+    <div class="actions">
+      <a class="button" href="/products/?v=1&category=board">
+        板材を探す
+      </a>
+      <a class="button" href="/products/?v=1&category=top">
+        天板を探す
+      </a>
+      <a class="button" href="/calculator/wall/">
+        壁材の数量を計算
+      </a>
+    </div>
+  </section>
+  <section>
+    <h2>購入前の比較ポイント</h2>
+    <div class="grid">
+      <div class="panel">
+        <h3>寸法と販売単位</h3>
+        <p>
+          1枚と1セット。注文できる寸法と届く寸法の範囲。それぞれを分けて確認します。
+        </p>
+      </div>
+      <div class="panel">
+        <h3>材料費と送料</h3>
+        <p>
+          送料が不明な商品はそのまま表示。板材代と送料等を含む小計を区別します。
+        </p>
+      </div>
+      <div class="panel">
+        <h3>広告に左右されない順序</h3>
+        <p>広告案件の有無で並び順を変えず、通常の購入先も案内します。</p>
+      </div>
+    </div>
+  </section>
+  <h2>選び方を読む</h2>
+  <div class="grid">
+    {articles.map((a) => (
+      <article class="card">
+        <h3>
+          <a href={'/articles/' + a.slug + '/'}>{a.title}</a>
+        </h3>
+        <p>{a.description}</p>
+      </article>
+    ))}
+  </div>
+  <p>
+    <a href="/articles/">記事一覧へ</a>
+  </p>
+</Base>

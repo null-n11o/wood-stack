@@ -1,10 +1,57 @@
 ---
+import ProductImage from '../../components/ProductImage.astro';
 import RelatedArticles from '../../components/RelatedArticles.astro';
-import Base from '../../layouts/Base.astro';import OfferList from '../../components/OfferList.astro';import {siteCatalog} from '../../catalog/site';import {catalogRows} from '../../search/compare';
-import LoadStatus from '../../components/LoadStatus.astro';import CompareTray from '../../components/CompareTray.astro';
-export async function getStaticPaths(){const catalog=await siteCatalog();return catalog.products.map(product=>({params:{slug:product.slug},props:{product,catalog}}));}
-const {product,catalog}=Astro.props;const rows=catalogRows(catalog).filter(r=>r.product.id===product.id);
+import Base from '../../layouts/Base.astro';
+import OfferList from '../../components/OfferList.astro';
+import { siteCatalog } from '../../catalog/site';
+import { catalogRows } from '../../search/compare';
+import LoadStatus from '../../components/LoadStatus.astro';
+import CompareTray from '../../components/CompareTray.astro';
+export async function getStaticPaths() {
+  const catalog = await siteCatalog();
+  return catalog.products.map((product) => ({
+    params: { slug: product.slug },
+    props: { product, catalog },
+  }));
+}
+const { product, catalog } = Astro.props;
+const rows = catalogRows(catalog).filter((r) => r.product.id === product.id);
 ---
-<Base title={product.name} description={product.description}><p><a href="/products/">商品一覧へ</a></p><h1>{product.name}</h1><p class="intro">{product.description}</p><div class="notice">画像未掲載。数量と施工方法は購入前に販売店へご確認ください。</div><section id="detail-controls" data-product-id={product.id}><LoadStatus/><label>比較・計算する販売条件<select aria-label="比較・計算する販売条件" id="detail-offer" disabled><option value="">寸法・販売条件を選択してください</option>{rows.map(r=><option value={r.offer.id}>{r.seller.name} / {r.variant.id}</option>)}</select></label><button id="detail-add" disabled>比較に追加</button><a id="detail-wall" hidden href="/calculator/wall/">この販売条件で壁材を計算</a><CompareTray/></section><OfferList rows={rows} catalog={catalog}/><RelatedArticles productId={product.id} category={product.category}/></Base>
 
-<script>import {startDetail} from '../../client/catalog';startDetail();</script>
+<Base title={product.name} description={product.description}>
+  <p>
+    <a href="/products/">商品一覧へ</a>
+  </p>
+  <h1>{product.name}</h1>
+  <p class="intro">{product.description}</p>
+  <ProductImage product={product} catalog={catalog} />
+  <div class="notice">数量と施工方法は購入前に販売店へご確認ください。</div>
+  <section id="detail-controls" data-product-id={product.id}>
+    <LoadStatus />
+    <label>
+      比較・計算する販売条件
+      <select aria-label="比較・計算する販売条件" id="detail-offer" disabled>
+        <option value="">寸法・販売条件を選択してください</option>
+        {rows.map((r) => (
+          <option value={r.offer.id}>
+            {r.seller.name} / {r.variant.id}
+          </option>
+        ))}
+      </select>
+    </label>
+    <button id="detail-add" disabled>
+      比較に追加
+    </button>
+    <a id="detail-wall" hidden href="/calculator/wall/">
+      この販売条件で壁材を計算
+    </a>
+    <CompareTray />
+  </section>
+  <OfferList rows={rows} catalog={catalog} />
+  <RelatedArticles productId={product.id} category={product.category} />
+</Base>
+
+<script>
+  import { startDetail } from '../../client/catalog';
+  startDetail();
+</script>

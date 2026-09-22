@@ -1,0 +1,21 @@
+---
+import type { Catalog, Product } from '../catalog/types';
+import { canShowImage } from '../offers/links';
+import { jstToday } from '../offers/freshness';
+interface Props {
+  product: Product;
+  catalog: Catalog;
+}
+const { product, catalog } = Astro.props;
+const image = catalog.images.find((i) => i.id === product.imageId);
+const visible = image && canShowImage(image, jstToday());
+---
+
+{visible ? (
+  <figure>
+    <img src={image.localPath!} alt={product.name} loading="lazy" />
+    {image.attribution && <figcaption>{image.attribution}</figcaption>}
+  </figure>
+) : (
+  <div class="image-empty">画像未掲載</div>
+)}

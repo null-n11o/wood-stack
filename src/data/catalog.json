@@ -6,18 +6,14 @@
       "name": "toolbox",
       "channel": "direct",
       "shopUrl": "https://www.r-toolbox.jp/",
-      "purchaseHosts": [
-        "www.r-toolbox.jp"
-      ]
+      "purchaseHosts": ["www.r-toolbox.jp"]
     },
     {
       "id": "hirokata",
       "name": "弘形工芸",
       "channel": "direct",
       "shopUrl": "https://www.hirokata.co.jp/",
-      "purchaseHosts": [
-        "www.hirokata.co.jp"
-      ]
+      "purchaseHosts": ["www.hirokata.co.jp"]
     }
   ],
   "products": [
@@ -28,9 +24,7 @@
       "category": "board",
       "species": "杉",
       "finish": "無塗装",
-      "uses": [
-        "wall"
-      ],
+      "uses": ["wall"],
       "description": "杉の足場板古材を薄く加工した板材。長さ・幅・厚さに各±1mmのばらつきがあります。",
       "status": "published",
       "identityEvidenceId": "toolbox-5mm-source",
@@ -43,10 +37,7 @@
       "category": "top",
       "species": null,
       "finish": null,
-      "uses": [
-        "desk",
-        "counter"
-      ],
+      "uses": ["desk", "counter"],
       "description": "サイズや形状を相談して見積もりを依頼する天板。1枚から注文できます。納品寸法と価格は個別確認が必要です。",
       "status": "published",
       "identityEvidenceId": "hirokata-melamine-source",
@@ -124,10 +115,7 @@
       "unitStep": 1,
       "maxUnits": 99999999,
       "checkedAt": "2026-09-22",
-      "evidenceIds": [
-        "toolbox-5mm-source",
-        "toolbox-order"
-      ]
+      "evidenceIds": ["toolbox-5mm-source", "toolbox-order"]
     },
     {
       "id": "hirokata-melamine-offer",
@@ -149,9 +137,7 @@
       "unitStep": 1,
       "maxUnits": null,
       "checkedAt": "2026-09-22",
-      "evidenceIds": [
-        "hirokata-melamine-source"
-      ]
+      "evidenceIds": ["hirokata-melamine-source"]
     }
   ],
   "adLinks": [],
@@ -161,12 +147,7 @@
       "url": "https://www.r-toolbox.jp/store/product/6346/",
       "checkedAt": "2026-09-22",
       "method": "direct",
-      "fields": [
-        "identity",
-        "dimensions",
-        "uses",
-        "availability"
-      ],
+      "fields": ["identity", "dimensions", "uses", "availability"],
       "note": "公式商品情報を確認。画像転載許可は未取得。"
     },
     {
@@ -174,10 +155,7 @@
       "url": "https://www.r-toolbox.jp/store/product/6346/step",
       "checkedAt": "2026-09-22",
       "method": "direct",
-      "fields": [
-        "price",
-        "purchase-unit"
-      ],
+      "fields": ["price", "purchase-unit"],
       "note": "注文設定の税込単価6200、数量min=1、step=1、max=99999999を確認。カート追加は未実施。"
     },
     {
@@ -185,12 +163,7 @@
       "url": "https://www.hirokata.co.jp/smp/item/T-000012.html",
       "checkedAt": "2026-09-22",
       "method": "direct",
-      "fields": [
-        "identity",
-        "uses",
-        "availability",
-        "purchase-unit"
-      ],
+      "fields": ["identity", "uses", "availability", "purchase-unit"],
       "note": "公式商品情報を確認。画像転載許可は未取得。"
     }
   ],
