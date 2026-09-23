@@ -1,0 +1,29 @@
+---
+import { publishedArticles } from '../articles/repository';
+import { relatedArticleSlugs } from '../articles/related';
+interface Props {
+  productId?: string;
+  category?: string;
+}
+const { productId = '', category = 'board' } = Astro.props;
+const articles = await publishedArticles(),
+  slugs = relatedArticleSlugs(
+    productId,
+    category,
+    articles.map((a) => a.data),
+  );
+---
+
+<section>
+  <h2>選び方の記事</h2>
+  <ul>
+    {slugs.map((slug) => {
+      const a = articles.find((a) => a.data.slug === slug)!;
+      return (
+        <li>
+          <a href={'/articles/' + slug + '/'}>{a.data.title}</a>
+        </li>
+      );
+    })}
+  </ul>
+</section>

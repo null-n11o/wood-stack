@@ -1,0 +1,164 @@
+---
+import { Image } from 'astro:assets';
+import workbench from '../assets/wood-workbench.png';
+import { publishedArticles } from '../articles/repository';
+import { searchArticles } from '../articles/related';
+import Base from '../layouts/Base.astro';
+const articles = searchArticles(
+  (await publishedArticles()).map((a) => a.data),
+  '',
+  '',
+  1,
+).items.slice(0, 3);
+---
+
+<Base title="木材を同じ条件で比較" pageClass="home-page">
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">WOOD, WITH A PLAN.</p>
+      <h1>
+        つくりたい空間に、
+        <br />
+        ちょうどいい木材を。
+      </h1>
+      <p class="intro">
+        壁一面の模様替えから、お店のカウンターまで。
+        <br class="desktop-break" />
+        素材と寸法を比べて、必要な量と費用を確かめる。
+      </p>
+      <div class="actions hero-actions">
+        <a class="button" href="/products/?v=1&category=board">
+          板材を探す<span aria-hidden="true">↗</span>
+        </a>
+        <a class="text-link" href="/products/?v=1&category=top">
+          天板を探す<span aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <p class="hero-note">
+        <span class="small-rule" aria-hidden="true"></span>
+        店舗を横断して比較。広告の有無で順位は変えません。
+      </p>
+    </div>
+    <figure class="hero-photo">
+      <Image
+        src={workbench}
+        alt="工房の作業台に積まれた木材のイメージ"
+        width={1200}
+        format="webp"
+        quality={82}
+        loading="eager"
+        fetchpriority="high"
+      />
+      <figcaption>AI生成のイメージ。掲載商品の写真ではありません。</figcaption>
+    </figure>
+  </section>
+  <section class="home-start" aria-labelledby="start-heading">
+    <div class="section-title">
+      <span class="section-number" aria-hidden="true">
+        01 /
+      </span>
+      <h2 id="start-heading">つくる場所から、選ぶ。</h2>
+    </div>
+    <div class="category-grid">
+      <a class="category-link" href="/products/?v=1&category=board&use=wall">
+        <span class="category-code">BOARD</span>
+        <div>
+          <h3>壁を変える、板材。</h3>
+          <p>材種・仕上げ・寸法から探す</p>
+        </div>
+        <span class="round-arrow" aria-hidden="true">
+          ↗
+        </span>
+      </a>
+      <a class="category-link" href="/products/?v=1&category=top">
+        <span class="category-code">TABLE TOP</span>
+        <div>
+          <h3>使い方に合う、天板。</h3>
+          <p>机やカウンターの条件を比べる</p>
+        </div>
+        <span class="round-arrow" aria-hidden="true">
+          ↗
+        </span>
+      </a>
+    </div>
+  </section>
+  <section class="calculator-feature">
+    <div class="calculator-heading">
+      <p class="eyebrow">WALL CALCULATOR</p>
+      <h2>
+        その壁に、
+        <br />
+        何枚必要だろう。
+      </h2>
+      <p>
+        壁のサイズと張る方向から、予備材を含む購入数と材料費を確認できます。
+      </p>
+      <a class="button" href="/calculator/wall/">
+        壁材の数量を計算<span aria-hidden="true">↗</span>
+      </a>
+    </div>
+    <ol class="calculation-steps">
+      <li>
+        <span>01</span>
+        <div>
+          <h3>使う板材を選ぶ</h3>
+          <p>比較に追加した板材を、同じ壁条件で計算。</p>
+        </div>
+      </li>
+      <li>
+        <span>02</span>
+        <div>
+          <h3>壁の寸法を入れる</h3>
+          <p>幅・高さ、張る方向と継ぎ方を指定。</p>
+        </div>
+      </li>
+      <li>
+        <span>03</span>
+        <div>
+          <h3>購入単位まで確かめる</h3>
+          <p>必要枚数、セット数、材料費をまとめて確認。</p>
+        </div>
+      </li>
+    </ol>
+    <p class="calculator-footnote">
+      長方形の壁一面が対象です。開口部の差引き・端材の再利用は含みません。
+    </p>
+  </section>
+  <section class="journal-section">
+    <div class="section-title">
+      <span class="section-number" aria-hidden="true">
+        02 /
+      </span>
+      <h2>選ぶ前に、知っておく。</h2>
+      <a class="text-link" href="/articles/">
+        記事一覧へ <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+    <div class="journal-grid">
+      {articles.map((a, i) => (
+        <article class="journal-card">
+          <p class="journal-number" aria-hidden="true">
+            0{i + 1}
+          </p>
+          <p class="muted">木材選びのノート</p>
+          <h3>
+            <a href={'/articles/' + a.slug + '/'}>{a.title}</a>
+          </h3>
+          <p>{a.description}</p>
+          <span class="journal-arrow" aria-hidden="true">
+            ↗
+          </span>
+        </article>
+      ))}
+    </div>
+  </section>
+  <section class="trust-strip" aria-label="比較の方針">
+    <p>
+      <strong>同じ条件で、比べるために。</strong>
+      寸法と販売単位を分け、材料費と送料を区別して表示します。
+    </p>
+    <a href="/policy/">
+      掲載方針を読む <span aria-hidden="true">↗</span>
+    </a>
+  </section>
+</Base>

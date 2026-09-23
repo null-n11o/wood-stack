@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "sellers": [
+    {
+      "id": "toolbox",
+      "name": "toolbox",
+      "channel": "direct",
+      "shopUrl": "https://www.r-toolbox.jp/",
+      "purchaseHosts": ["www.r-toolbox.jp"]
+    },
+    {
+      "id": "hirokata",
+      "name": "弘形工芸",
+      "channel": "direct",
+      "shopUrl": "https://www.hirokata.co.jp/",
+      "purchaseHosts": ["www.hirokata.co.jp"]
+    }
+  ],
+  "products": [
+    {
+      "id": "toolbox-5mm",
+      "slug": "toolbox-5mm",
+      "name": "5mm厚の足場板 無塗装",
+      "category": "board",
+      "species": "杉",
+      "finish": "無塗装",
+      "uses": ["wall"],
+      "description": "杉の足場板古材を薄く加工した板材。長さ・幅・厚さに各±1mmのばらつきがあります。",
+      "status": "published",
+      "identityEvidenceId": "toolbox-5mm-source",
+      "imageId": null
+    },
+    {
+      "id": "hirokata-melamine",
+      "slug": "hirokata-melamine",
+      "name": "メラミン天板 オーダーメイド",
+      "category": "top",
+      "species": null,
+      "finish": null,
+      "uses": ["desk", "counter"],
+      "description": "サイズや形状を相談して見積もりを依頼する天板。1枚から注文できます。納品寸法と価格は個別確認が必要です。",
+      "status": "published",
+      "identityEvidenceId": "hirokata-melamine-source",
+      "imageId": null
+    }
+  ],
+  "variants": [
+    {
+      "id": "toolbox-5mm-size",
+      "productId": "toolbox-5mm",
+      "sellerSku": "WL-WB001-04-G038",
+      "length": {
+        "kind": "bounded",
+        "minMm": 909,
+        "maxMm": 911
+      },
+      "width": {
+        "kind": "bounded",
+        "minMm": 134,
+        "maxMm": 136
+      },
+      "thickness": {
+        "kind": "bounded",
+        "minMm": 4,
+        "maxMm": 6
+      },
+      "coverageWidth": {
+        "kind": "bounded",
+        "minMm": 134,
+        "maxMm": 136
+      },
+      "geometry": "uniform",
+      "evidenceId": "toolbox-5mm-source"
+    },
+    {
+      "id": "hirokata-melamine-size",
+      "productId": "hirokata-melamine",
+      "sellerSku": "T-000012",
+      "length": {
+        "kind": "unknown"
+      },
+      "width": {
+        "kind": "unknown"
+      },
+      "thickness": {
+        "kind": "unknown"
+      },
+      "coverageWidth": {
+        "kind": "unknown"
+      },
+      "geometry": "uniform",
+      "evidenceId": "hirokata-melamine-source"
+    }
+  ],
+  "offers": [
+    {
+      "id": "toolbox-5mm-offer",
+      "variantId": "toolbox-5mm-size",
+      "sellerId": "toolbox",
+      "sourceUrl": "https://www.r-toolbox.jp/store/product/6346/",
+      "purchaseUrl": "https://www.r-toolbox.jp/store/product/6346/",
+      "saleUnit": "set",
+      "piecesPerUnit": 10,
+      "price": {
+        "kind": "fixed",
+        "yen": 6200,
+        "tax": "included"
+      },
+      "shipping": {
+        "kind": "unknown",
+        "note": "配送先・数量等により送料の確認が必要"
+      },
+      "availability": "made-to-order",
+      "minimumUnits": 1,
+      "unitStep": 1,
+      "maxUnits": 99999999,
+      "checkedAt": "2026-09-22",
+      "evidenceIds": ["toolbox-5mm-source", "toolbox-order"]
+    },
+    {
+      "id": "hirokata-melamine-offer",
+      "variantId": "hirokata-melamine-size",
+      "sellerId": "hirokata",
+      "sourceUrl": "https://www.hirokata.co.jp/smp/item/T-000012.html",
+      "purchaseUrl": "https://www.hirokata.co.jp/smp/item/T-000012.html",
+      "saleUnit": "piece",
+      "piecesPerUnit": 1,
+      "price": {
+        "kind": "quote"
+      },
+      "shipping": {
+        "kind": "unknown",
+        "note": "配送先・数量等により送料の確認が必要"
+      },
+      "availability": "quote",
+      "minimumUnits": 1,
+      "unitStep": 1,
+      "maxUnits": null,
+      "checkedAt": "2026-09-22",
+      "evidenceIds": ["hirokata-melamine-source"]
+    }
+  ],
+  "adLinks": [],
+  "evidence": [
+    {
+      "id": "toolbox-5mm-source",
+      "url": "https://www.r-toolbox.jp/store/product/6346/",
+      "checkedAt": "2026-09-22",
+      "method": "direct",
+      "fields": ["identity", "dimensions", "uses", "availability"],
+      "note": "公式商品情報を確認。画像転載許可は未取得。"
+    },
+    {
+      "id": "toolbox-order",
+      "url": "https://www.r-toolbox.jp/store/product/6346/step",
+      "checkedAt": "2026-09-22",
+      "method": "direct",
+      "fields": ["price", "purchase-unit"],
+      "note": "注文設定の税込単価6200、数量min=1、step=1、max=99999999を確認。カート追加は未実施。"
+    },
+    {
+      "id": "hirokata-melamine-source",
+      "url": "https://www.hirokata.co.jp/smp/item/T-000012.html",
+      "checkedAt": "2026-09-22",
+      "method": "direct",
+      "fields": ["identity", "uses", "availability", "purchase-unit"],
+      "note": "公式商品情報を確認。画像転載許可は未取得。"
+    }
+  ],
+  "images": []
+}

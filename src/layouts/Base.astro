@@ -1,0 +1,78 @@
+---
+import '../styles/global.css';
+interface Props {
+  title: string;
+  description?: string;
+  noindex?: boolean;
+  pageClass?: string;
+}
+const {
+  title,
+  description = '木材の仕様と購入条件を比べ、自分の壁に必要な数量を確かめる。',
+  noindex = false,
+  pageClass = '',
+} = Astro.props;
+const path = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} | wood-stack</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex,follow" />}
+  </head>
+  <body>
+    <a class="skip" tabindex="0" href="#main">
+      本文へ移動
+    </a>
+    <header class="site-header">
+      <a class="brand" href="/">
+        wood-stack<span>木材を選ぶ。空間をつくる。</span>
+      </a>
+      <nav aria-label="メイン">
+        <a
+          href="/products/"
+          aria-current={path.startsWith('/products/') ? 'page' : undefined}
+        >
+          商品を探す
+        </a>
+        <a
+          href="/calculator/wall/"
+          aria-current={path.startsWith('/calculator/') ? 'page' : undefined}
+        >
+          壁材計算
+        </a>
+        <a
+          href="/articles/"
+          aria-current={path.startsWith('/articles/') ? 'page' : undefined}
+        >
+          選び方の記事
+        </a>
+        <a
+          href="/compare/"
+          aria-current={path.startsWith('/compare/') ? 'page' : undefined}
+        >
+          比較を見る
+        </a>
+      </nav>
+    </header>
+    <main id="main" tabindex="-1" class={pageClass}>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="footer-brand">
+        wood-stack<span>素材を知ると、つくるが近づく。</span>
+      </div>
+      <div class="footer-info">
+        <a href="/policy/">掲載方針・広告について</a>
+        <p>
+          価格と販売条件は確認日時点の情報です。購入前に販売店でご確認ください。
+        </p>
+        <small>WOOD & MATERIALS / FIND. COMPARE. MAKE.</small>
+      </div>
+    </footer>
+  </body>
+</html>

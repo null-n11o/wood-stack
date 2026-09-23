@@ -8,7 +8,7 @@
 
 **Tech Stack:** Node.js 22系、npm、Astro 7系、TypeScript strict、Vitest、Playwright。依存は実装時に互換性確認後、package-lock.jsonへ固定。
 
-**Spec:** [2026-09-22-wood-stack-design.md](../specs/2026-09-22-wood-stack-design.md)。作成日2026-09-22、設計・本計画ともレビュー待ち。以下のコードブロックは実装時の契約・テスト例であり、今回のPRには実行コードを作成しない。
+**Spec:** [2026-09-22-wood-stack-design.md](../specs/2026-09-22-wood-stack-design.md)。作成日2026-09-22、設計・本計画とも2026-09-22 CEO承認済み。以下のコードブロックは実装時の契約・テスト例であり、実装開始時の契約として使用する。
 
 ## Global Constraints
 
@@ -465,6 +465,10 @@ test.each([[1800,900,'vertical',24800],[900,1800,'vertical',18600],[2700,2400,'h
 - [ ] **Step 5:** 375px/1280px、キーボードのみ、200%拡大、比較表の横スクロール、JS無効で手動確認する。500 offerの検索・3件計算p95を計測し、環境と値を記録。ChromiumとWebKitのE2Eを実行する。
 - [ ] **Step 6:** catalog-operationsに登録・再確認周期・画像権利・広告停止・取込復旧を記述。通常buildに試験fixtureが含まれないことを確認し、READMEとAGENTSへ実在するコマンドを反映。
 - [ ] **Step 7:** `npm run verify`、`git diff --check` の結果とA01〜A14の証跡を保存。 `git commit -m "test: verify wood-stack acceptance and editorial workflow"`、既存リモートへpushしてPRを作成。CEOへ受入を求め、マージ・公開は行わない。
+
+## 実行結果
+
+2026-09-22にCEO承認を取得し、Task 1〜8を順次実装した。以下の手順・コード例は承認時の計画として残す。実際のコミットと受入結果は[実装検証](../../implementation-verification.md)を参照。実行時には共通フォーム処理をshared.tsへ集約し、検証コマンドを実在するものへ具体化した。
 
 ## 計画の自己点検
 

@@ -14,3 +14,14 @@ coverage/
 .astro/
 *.log
 .claude/settings.local.json
+
+# Generated and temporary implementation artifacts
+node_modules/
+dist/
+dist-test/
+.astro/
+playwright-report/
+test-results/
+*.tsbuildinfo
+src/data/*.tmp
+src/data/*.lock

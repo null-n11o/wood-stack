@@ -1,0 +1,92 @@
+import { expect, test } from 'vitest';
+import { calculateCost } from '../../src/offers/cost';
+import { freshness } from '../../src/offers/freshness';
+import { estimateWall } from '../../src/calculator/wall';
+import {
+  fixtureRow,
+  fixtureCatalog,
+  wallInput,
+  today,
+} from '../fixtures/catalog';
+const cost = (row = fixtureRow(), ev = fixtureCatalog().evidence) =>
+  calculateCost(row, estimateWall(row, wallInput), ev, today);
+test('送料不明を0円にしない', () =>
+  expect(cost()).toMatchObject({
+    materialHighYen: 4000,
+    shippingYen: null,
+    subtotalHighYen: null,
+    rankable: true,
+  }));
+test('全国送料無料だけを0円として加算', () =>
+  expect(
+    cost(
+      fixtureRow({
+        offer: {
+          shipping: {
+            kind: 'free',
+            regions: ['all'],
+            maxUnits: null,
+            evidenceId: 'ev-a',
+          },
+        },
+      }),
+    ),
+  ).toMatchObject({ shippingYen: 0, subtotalHighYen: 4000 }));
+test.each(['regional', 'limit', 'missing'] as const)(
+  '%sの送料は未確定',
+  (kind) => {
+    const r = fixtureRow({
+      offer: {
+        shipping: {
+          kind: 'fixed',
+          yen: 500,
+          regions: kind === 'regional' ? ['東京'] : ['all'],
+          maxUnits: kind === 'limit' ? 1 : 10,
+          evidenceId: kind === 'missing' ? 'missing' : 'ev-a',
+        },
+      },
+    });
+    expect(cost(r).subtotalHighYen).toBeNull();
+  },
+);
+test.each([
+  'tax',
+  'quote',
+  'from',
+  'stale-price',
+  'stale-spec',
+  'indirect',
+  'unavailable',
+] as const)('%sは順位対象外', (kind) => {
+  const r = fixtureRow(),
+    e = fixtureCatalog().evidence;
+  if (kind === 'tax')
+    r.offer.price = { kind: 'fixed', yen: 2000, tax: 'unknown' };
+  if (kind === 'quote') r.offer.price = { kind: 'quote' };
+  if (kind === 'from')
+    r.offer.price = { kind: 'from', yen: 2000, tax: 'included' };
+  if (kind === 'stale-price') e[0].checkedAt = '2026-08-22';
+  if (kind === 'stale-spec') e[0].checkedAt = '2026-06-22';
+  if (kind === 'indirect') e[0].method = 'search-index';
+  if (kind === 'unavailable') r.variant.length = { kind: 'unknown' };
+  expect(cost(r, e).rankable).toBe(false);
+  expect(cost(r, e).reasons.length).toBeGreaterThan(0);
+});
+test.each([
+  ['2026-08-23', 30, 'fresh'],
+  ['2026-08-22', 30, 'stale'],
+  ['2026-06-24', 90, 'fresh'],
+  ['2026-06-23', 90, 'stale'],
+  ['2026-09-23', 30, 'stale'],
+  ['2026-02-30', 30, 'stale'],
+] as const)('鮮度 %s %i', (d, limit, want) =>
+  expect(freshness(d, today, limit)).toBe(want),
+);
+test('金額上限超過は部分額も返さない', () =>
+  expect(
+    cost(
+      fixtureRow({
+        offer: { price: { kind: 'fixed', yen: 100000000, tax: 'included' } },
+      }),
+    ),
+  ).toMatchObject({ materialHighYen: null, rankable: false }));

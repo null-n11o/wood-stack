@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import CompareTray from '../components/CompareTray.astro';
+import LoadStatus from '../components/LoadStatus.astro';
+---
+
+<Base title="商品を比較" noindex>
+  <div class="page-heading">
+    <p class="eyebrow">SIDE BY SIDE</p>
+    <h1>商品を比較</h1>
+    <p>寸法・販売条件ごとに最大3件まで比較できます。</p>
+  </div>
+  <LoadStatus />
+  <CompareTray />
+  <div
+    id="comparison"
+    class="table-scroll"
+    tabindex="0"
+    aria-label="商品比較表"
+  ></div>
+  <div class="actions">
+    <a href="/products/">商品を追加</a>
+    <a href="/calculator/wall/">壁材の数量を計算</a>
+  </div>
+</Base>
+<script>
+  import { startCompare } from '../client/compare';
+  startCompare();
+</script>

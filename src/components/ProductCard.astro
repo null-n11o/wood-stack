@@ -1,0 +1,31 @@
+---
+import ProductImage from './ProductImage.astro';
+import type { Catalog, CatalogRow } from '../catalog/types';
+import Price from './Price.astro';
+import { dimensionText } from '../catalog/format';
+interface Props {
+  row: CatalogRow;
+  count: number;
+  catalog: Catalog;
+}
+const { row, count, catalog } = Astro.props;
+---
+
+<article class="card" data-product-id={row.product.id}>
+  <ProductImage product={row.product} catalog={catalog} />
+  <p class="eyebrow">
+    {row.product.category === 'board' ? 'BOARD' : 'TABLE TOP'} / {count}購入先
+  </p>
+  <h2>
+    <a href={'/products/' + row.product.slug + '/'}>{row.product.name}</a>
+  </h2>
+  <p>{row.product.description}</p>
+  <p class="muted">
+    長さ {dimensionText(row.variant.length)} / 幅{' '}
+    {dimensionText(row.variant.width)}
+  </p>
+  <Price offer={row.offer} />
+  <p class="muted">
+    {row.seller.name}・販売状態確認 {row.offer.checkedAt}
+  </p>
+</article>

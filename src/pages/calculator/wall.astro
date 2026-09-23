@@ -1,0 +1,41 @@
+---
+import Base from '../../layouts/Base.astro';
+import CompareTray from '../../components/CompareTray.astro';
+import LoadStatus from '../../components/LoadStatus.astro';
+import WallForm from '../../components/WallForm.astro';
+import Estimate from '../../components/Estimate.astro';
+---
+
+<Base title="壁材の数量を計算" noindex>
+  <div class="page-heading">
+    <p class="eyebrow">WALL CALCULATOR</p>
+    <h1>壁材の数量を計算</h1>
+    <p>比較に追加した板材を同じ壁条件で計算します。</p>
+  </div>
+  <LoadStatus />
+  <CompareTray />
+  <div class="tool-layout">
+    <WallForm />
+    <aside class="tool-aside">
+      <span class="step-tag">BEFORE YOU START</span>
+      <h2>板材を選んだら、壁を測る。</h2>
+      <ol>
+        <li>比較リストに使いたい板材を追加</li>
+        <li>壁の幅・高さをmmで入力</li>
+        <li>張る方向と予備材の条件を確認</li>
+      </ol>
+      <p class="aside-note">
+        寸法のばらつきがある商品は両端の値で計算し、最多側を購入目安に使います。
+      </p>
+    </aside>
+  </div>
+  <Estimate />
+  <div class="actions">
+    <a href="/products/">板材を追加</a>
+    <a href="/compare/">計算条件を比較へ戻す</a>
+  </div>
+</Base>
+<script>
+  import { startWall } from '../../client/wall';
+  startWall();
+</script>
