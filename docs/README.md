@@ -21,4 +21,6 @@ KCPの `codex/wood-stack-implementation-approval`、コミット `590ac64` の�
 6. [設計時の検証記録](verification.md)と[実装検証](implementation-verification.md)
 7. [商品・記事の更新手順](catalog-operations.md)と[実商品の直接確認](research/2026-09-22-registration.md)
 
-開発資料の正本はこのリポジトリ、企画・調査の正本はKCP、継続Taskの正本はNotion。[参照manifest](PLAN-20260922-301-wood-stack.tasks.json)は作業キーとURLだけを管理し、日々の状態や期限を複製しない。上位PLANコピー本文の「Notion未接続」は参照時点の記録。現在の接続はmanifestとNotion Taskを参照する。
+開発資料の正本はこのリポジトリ、企画・調査の正本はKCP、継続Taskの正本はNotion。[参照manifest](PLAN-20260922-301-wood-stack.tasks.json)は作業キーとURLだけを管理し、日々の状態や期限を複製しない。現在の接続はmanifestとNotion Taskを参照する。
+
+[2026-09-23の画面デザイン改善](design/2026-09-23-visual-refresh.md)に使用スキル・変更理由・生成素材の出典を記録した。

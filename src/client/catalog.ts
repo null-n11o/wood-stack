@@ -26,6 +26,12 @@ export function startCatalog() {
       page = searchCatalog(catalog, state.filters, jstToday());
     state.filters.page = page.page;
     fillForm(form, state.filters);
+    if (
+      ['lmin', 'lmax', 'wmin', 'wmax', 'tmin', 'tmax', 'budget'].some(
+        (key) => state.filters[key as keyof typeof state.filters] !== null,
+      )
+    )
+      byId<HTMLDetailsElement>('dimension-filter').open = true;
     byId('static-catalog').hidden = true;
     const results = byId('search-results');
     results.hidden = false;
@@ -50,8 +56,36 @@ export function startCatalog() {
         if (image.attribution)
           figure.append(el('figcaption', image.attribution));
         card.append(figure);
-      } else card.append(el('p', '画像未掲載'));
-      card.append(h, el('p', p.purchaseSourceCount + '購入先'));
+      } else {
+        const material = el('div');
+        material.className = 'image-empty';
+        const caption = el('span');
+        caption.className = 'material-caption';
+        caption.append(el('span', '素材情報'), el('span', '画像未掲載'));
+        const kind = el(
+          'span',
+          r.product.category === 'board' ? 'BOARD' : 'TABLE TOP',
+        );
+        kind.className = 'material-kind';
+        kind.setAttribute('aria-hidden', 'true');
+        const spec = el(
+          'span',
+          `長さ ${dimensionText(r.variant.length)} / 幅 ${dimensionText(r.variant.width)}`,
+        );
+        spec.className = 'material-spec';
+        material.append(caption, kind, spec);
+        card.append(material);
+      }
+      const meta = el(
+        'p',
+        p.purchaseSourceCount +
+          '購入先 / ' +
+          (r.product.species ?? '材種未確認') +
+          ' / ' +
+          (r.product.finish ?? '仕上げ未確認'),
+      );
+      meta.className = 'product-meta';
+      card.append(meta, h);
       const label = el('label', '寸法・販売条件（' + r.product.name + '）'),
         select = el('select');
       for (const id of p.matchingOfferIds) {
@@ -72,9 +106,13 @@ export function startCatalog() {
         add = button(r.product.name + 'を比較に追加', () =>
           session.add(select.value),
         );
+      info.className = 'offer-info';
       const show = () => {
         const row = rows.find((r) => r.offer.id === select.value)!,
           unit = unitPrice(row, catalog, jstToday());
+        const materialSpec = card.querySelector('.material-spec');
+        if (materialSpec)
+          materialSpec.textContent = `長さ ${dimensionText(row.variant.length)} / 幅 ${dimensionText(row.variant.width)}`;
         info.replaceChildren(
           el('p', priceText(row.offer)),
           el(
@@ -98,12 +136,9 @@ export function startCatalog() {
       };
       select.onchange = show;
       show();
-      card.append(
-        label,
-        info,
-        el('p', '代表の販売条件は並び順で変わります。'),
-        add,
-      );
+      const note = el('p', '代表の販売条件は並び順で変わります。');
+      note.className = 'card-note';
+      card.append(label, info, note, add);
       results.append(card);
     }
     if (!page.total)

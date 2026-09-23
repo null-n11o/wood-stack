@@ -1,6 +1,7 @@
 ---
 import type { Catalog, Product } from '../catalog/types';
 import { canShowImage } from '../offers/links';
+import { dimensionText } from '../catalog/format';
 import { jstToday } from '../offers/freshness';
 interface Props {
   product: Product;
@@ -8,6 +9,7 @@ interface Props {
 }
 const { product, catalog } = Astro.props;
 const image = catalog.images.find((i) => i.id === product.imageId);
+const variant = catalog.variants.find((v) => v.productId === product.id);
 const visible = image && canShowImage(image, jstToday());
 ---
 
@@ -17,5 +19,18 @@ const visible = image && canShowImage(image, jstToday());
     {image.attribution && <figcaption>{image.attribution}</figcaption>}
   </figure>
 ) : (
-  <div class="image-empty">画像未掲載</div>
+  <div class="image-empty">
+    <span class="material-caption">
+      <span>素材情報</span>
+      <span>画像未掲載</span>
+    </span>
+    <span class="material-kind" aria-hidden="true">
+      {product.category === 'board' ? 'BOARD' : 'TABLE TOP'}
+    </span>
+    {variant && (
+      <span class="material-spec">
+        長さ {dimensionText(variant.length)} / 幅 {dimensionText(variant.width)}
+      </span>
+    )}
+  </div>
 )}

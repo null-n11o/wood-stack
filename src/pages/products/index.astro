@@ -12,92 +12,115 @@ const catalog = await siteCatalog(),
 ---
 
 <Base title="商品を探す" noindex>
-  <p class="eyebrow">MATERIAL CATALOG</p>
-  <h1>商品を探す</h1>
-  <p class="intro">
-    寸法・販売単位・確認日をそろえて比較できます。送料と材料費は別に表示します。
-  </p>
-  <form id="search-form" class="panel" novalidate>
-    <fieldset disabled>
-      <legend>検索条件</legend>
-      <div class="form-grid">
-        <label>
-          カテゴリー
-          <select name="category" aria-label="カテゴリー">
-            <option value="board">板材</option>
-            <option value="top">天板</option>
-          </select>
-        </label>
-        <label>
-          検索語
-          <input id="q" name="q" maxlength="100" />
-        </label>
-        {(['species', 'finish', 'use'] as const).map((key, i) => (
+  <div class="page-heading">
+    <p class="eyebrow">MATERIAL CATALOG</p>
+    <h1>商品を探す</h1>
+    <p class="intro">
+      寸法・販売単位・確認日をそろえて比較できます。送料と材料費は別に表示します。
+    </p>
+  </div>
+  <div class="catalog-layout">
+    <form id="search-form" class="panel" novalidate>
+      <fieldset disabled>
+        <legend>検索条件</legend>
+        <div class="form-grid">
           <label>
-            {['材種', '仕上げ', '用途'][i]}
-            <select name={key} aria-label={['材種', '仕上げ', '用途'][i]}>
-              <option value="">すべて</option>
-              {vocab[key].map((v) => (
-                <option value={v}>{v}</option>
-              ))}
+            カテゴリー
+            <select name="category" aria-label="カテゴリー">
+              <option value="board">板材</option>
+              <option value="top">天板</option>
             </select>
           </label>
-        ))}
-        {(
-          ['lmin', 'lmax', 'wmin', 'wmax', 'tmin', 'tmax', 'budget'] as const
-        ).map((key, i) => (
           <label>
-            {
-              [
-                '長さの下限（mm）',
-                '長さの上限（mm）',
-                '幅の下限（mm）',
-                '幅の上限（mm）',
-                '厚さの下限（mm）',
-                '厚さの上限（mm）',
-                '1販売単位の税込上限（円）',
-              ][i]
-            }
-            <input id={key} name={key} inputmode="numeric" />
+            検索語
+            <input id="q" name="q" maxlength="100" />
           </label>
-        ))}
-        <label>
-          並び順
-          <select name="sort" aria-label="並び順">
-            <option value="name">名前順</option>
-            <option value="checked">確認日が新しい順</option>
-            <option value="unit-price">参考単価順</option>
-          </select>
-        </label>
+          {(['species', 'finish', 'use'] as const).map((key, i) => (
+            <label>
+              {['材種', '仕上げ', '用途'][i]}
+              <select name={key} aria-label={['材種', '仕上げ', '用途'][i]}>
+                <option value="">すべて</option>
+                {vocab[key].map((v) => (
+                  <option value={v}>{v}</option>
+                ))}
+              </select>
+            </label>
+          ))}
+        </div>
+        <details id="dimension-filter" class="filter-divider">
+          <summary>寸法と予算で絞り込む</summary>
+          <div class="dimension-fields">
+            {(
+              [
+                'lmin',
+                'lmax',
+                'wmin',
+                'wmax',
+                'tmin',
+                'tmax',
+                'budget',
+              ] as const
+            ).map((key, i) => (
+              <label>
+                {
+                  [
+                    '長さの下限（mm）',
+                    '長さの上限（mm）',
+                    '幅の下限（mm）',
+                    '幅の上限（mm）',
+                    '厚さの下限（mm）',
+                    '厚さの上限（mm）',
+                    '1販売単位の税込上限（円）',
+                  ][i]
+                }
+                <input id={key} name={key} inputmode="numeric" />
+              </label>
+            ))}
+          </div>
+        </details>
+        <div class="filter-divider">
+          <label>
+            並び順
+            <select name="sort" aria-label="並び順">
+              <option value="name">名前順</option>
+              <option value="checked">確認日が新しい順</option>
+              <option value="unit-price">参考単価順</option>
+            </select>
+          </label>
+        </div>
+        <div class="filter-actions">
+          <button type="submit">条件を適用</button>{' '}
+          <button id="reset-search" type="button">
+            全解除
+          </button>
+        </div>
+      </fieldset>
+    </form>
+    <div class="catalog-main">
+      <LoadStatus />
+      <CompareTray />
+      <p id="result-count" role="status" class="status"></p>
+      <div id="active-filters" class="actions"></div>
+      <div id="search-results" class="grid" hidden></div>
+      <div id="pagination" class="actions"></div>
+      <noscript>
+        <p class="notice">
+          検索・比較・計算にはJavaScriptが必要です。商品情報と購入先は以下から確認できます。
+        </p>
+      </noscript>
+      <div id="static-catalog" class="grid">
+        {catalog.products.map((p) => {
+          const rs = rows.filter((r) => r.product.id === p.id);
+          return (
+            <ProductCard
+              catalog={catalog}
+              row={rs[0]}
+              count={new Set(rs.map((r) => r.seller.id)).size}
+            />
+          );
+        })}
       </div>
-      <button type="submit">条件を適用</button>{' '}
-      <button id="reset-search" type="button">
-        全解除
-      </button>
-    </fieldset>
-  </form>
-  <LoadStatus />
-  <CompareTray />
-  <p id="result-count" role="status" class="status"></p>
-  <div id="active-filters" class="actions"></div>
-  <div id="search-results" class="grid" hidden></div>
-  <div id="pagination" class="actions"></div>
-  <noscript>
-    <p class="notice">
-      検索・比較・計算にはJavaScriptが必要です。商品情報と購入先は以下から確認できます。
-    </p>
-  </noscript>
-  <div id="static-catalog" class="grid">
-    {catalog.products.map((p) => {
-      const rs = rows.filter((r) => r.product.id === p.id);
-      return (
-        <ProductCard
-          catalog={catalog}
-          row={rs[0]}
-          count={new Set(rs.map((r) => r.seller.id)).size}
-        />
-      );
-    })}
+    </div>
   </div>
   <RelatedArticles />
 </Base>

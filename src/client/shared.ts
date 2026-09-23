@@ -40,6 +40,8 @@ export function renderErrors(errors: string[]) {
     const p = el('p');
     const key = message.split('の')[0],
       target = document.getElementById(key);
+    const details = target?.closest('details');
+    if (details) details.open = true;
     p.append(
       target ? link(message, '#' + key) : document.createTextNode(message),
     );

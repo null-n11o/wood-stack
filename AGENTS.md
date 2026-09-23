@@ -63,6 +63,7 @@ Node 22.22.3。初回は `npm ci` と `npx playwright install chromium webkit`�
 - 設計: `brainstorming`。
 - 実装計画: `writing-plans`。
 - レビュー通過後の実装: `executing-plans` と `test-driven-development`。計画のTask順に進め、Task単位でコミットする。
+- 既存画面の視覚改善: `redesign-existing-projects`。`design-taste-frontend` はトップの表現に限り、比較表・入力要件を優先する。導入済みスキルを全文読んで適用する。
 - 完了前の検証: `verification-before-completion`。
 - 長文・技術記事: KCP指定の `japanese-tech-writing`、日本語校閲: `japanese-proofreading`。
 

@@ -7,9 +7,11 @@ const articles = (await publishedArticles()).map((a) => a.data),
 ---
 
 <Base title="選び方の記事">
-  <p class="eyebrow">MATERIAL NOTES</p>
-  <h1>選び方の記事</h1>
-  <p>数量・寸法・費用を確認し、自分の条件で商品を探せます。</p>
+  <div class="page-heading">
+    <p class="eyebrow">MATERIAL NOTES</p>
+    <h1>選び方の記事</h1>
+    <p>数量・寸法・費用を確認し、自分の条件で商品を探せます。</p>
+  </div>
   <form id="article-form">
     <fieldset disabled>
       <div class="form-grid">

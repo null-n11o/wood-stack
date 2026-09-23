@@ -22,9 +22,14 @@ const rows = catalogRows(catalog).filter((r) => r.product.id === product.id);
   <p>
     <a href="/products/">商品一覧へ</a>
   </p>
-  <h1>{product.name}</h1>
-  <p class="intro">{product.description}</p>
-  <ProductImage product={product} catalog={catalog} />
+  <div class="detail-intro">
+    <div>
+      <p class="eyebrow">MATERIAL DETAILS</p>
+      <h1>{product.name}</h1>
+      <p class="intro">{product.description}</p>
+    </div>
+    <ProductImage product={product} catalog={catalog} />
+  </div>
   <div class="notice">数量と施工方法は購入前に販売店へご確認ください。</div>
   <section id="detail-controls" data-product-id={product.id}>
     <LoadStatus />
